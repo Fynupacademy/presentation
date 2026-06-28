@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Pierre — Vincent 1er Juillet 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red:    #c0392b;
+  --red2:   #ff6b6b;
+  --dark:   #0d0d0d;
+  --dark2:  #1a1a1a;
+  --dark3:  #252525;
+  --white:  #ffffff;
+  --grey:   #aaaaaa;
+  --gold:   #f0b429;
+  --blue:   #4db8ff;
+  --green:  #4cd97b;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--dark);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  color: var(--white);
+}
+
+.deck { width: 100vw; height: 100vh; position: relative; }
+
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 2.5rem 1.5rem 5rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+  text-align: center;
+}
+.slide.active { opacity: 1; pointer-events: all; }
+
+.nav {
+  position: fixed; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 0; align-items: center; z-index: 100;
+  background: #1a1a1a; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12); overflow: hidden;
+}
+.nav button {
+  background: none; border: none; color: var(--white);
+  font-size: 1.1rem; cursor: pointer; padding: 0.85rem 1.6rem;
+  transition: background 0.2s;
+}
+.nav button:active { background: rgba(192,57,43,0.4); }
+.nav .counter {
+  color: var(--grey); font-size: 0.78rem;
+  min-width: 3rem; text-align: center;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 0.85rem 0;
+}
+
+.dots {
+  position: fixed; top: 1.1rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 0.45rem; z-index: 100;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); transition: all 0.3s;
+}
+.dot.active { background: var(--red); transform: scale(1.5); }
+
+/* ════ SLIDE 1 ════ */
+#s1 { background: #0d0d0d; }
+
+#s1 .badge-top {
+  position: absolute; top: 2rem; left: 0; right: 0;
+  display: flex; justify-content: center;
+}
+#s1 .badge {
+  background: var(--red); color: white;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.3rem 0.9rem; border-radius: 999px;
+}
+#s1 .name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4rem, 18vw, 7rem);
+  font-weight: 900; color: #ffffff;
+  line-height: 0.95; letter-spacing: -0.02em;
+}
+#s1 .dot-red { color: var(--red); }
+#s1 .subtitle { font-size: 0.82rem; color: var(--grey); margin-top: 0.6rem; font-style: italic; }
+#s1 .divider { width: 2.5rem; height: 2px; background: var(--red); margin: 1.4rem auto; }
+
+#s1 .facts {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.6rem; width: 100%; max-width: 340px; margin: 0 auto;
+}
+#s1 .fact {
+  border-radius: 10px; padding: 0.85rem 0.9rem; text-align: left;
+  background: var(--dark2);
+}
+#s1 .fact.f1 { border-top: 3px solid var(--red); }
+#s1 .fact.f2 { border-top: 3px solid var(--gold); }
+#s1 .fact.f3 { border-top: 3px solid var(--blue); }
+#s1 .fact.f4 { border-top: 3px solid var(--green); }
+
+#s1 .flabel {
+  font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 0.3rem;
+}
+#s1 .fact.f1 .flabel { color: var(--red2); }
+#s1 .fact.f2 .flabel { color: var(--gold); }
+#s1 .fact.f3 .flabel { color: var(--blue); }
+#s1 .fact.f4 .flabel { color: var(--green); }
+
+#s1 .fvalue { font-size: 0.82rem; color: #ffffff; font-weight: 500; line-height: 1.45; }
+#s1 .callout { margin-top: 1rem; font-size: 0.85rem; color: var(--grey); font-style: italic; }
+#s1 .callout strong { color: #ffffff; font-style: normal; }
+
+/* ════ SLIDE 2 ════ */
+#s2 { background: #0d0d0d; }
+#s2 .eyebrow { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; color: var(--green); margin-bottom: 0.85rem; }
+#s2 .headline { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 6.5vw, 2.6rem); font-weight: 900; color: var(--white); line-height: 1.15; margin-bottom: 0.6rem; }
+#s2 .intro { font-size: 0.82rem; color: var(--grey); line-height: 1.55; max-width: 300px; margin: 0 auto 1.3rem; }
+#s2 .intro strong { color: #ffffff; }
+
+#s2 .cycle { width: 100%; max-width: 320px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+#s2 .cbox { border-radius: 10px; padding: 0.85rem 1rem; text-align: center; border: 1.5px solid; }
+#s2 .cbox.c1 { background: rgba(77,217,123,0.1); border-color: rgba(77,217,123,0.5); }
+#s2 .cbox.c2 { background: rgba(77,184,255,0.1); border-color: rgba(77,184,255,0.5); }
+#s2 .cbox.c3 { background: rgba(240,180,41,0.1); border-color: rgba(240,180,41,0.5); }
+#s2 .cbox.c4 { background: rgba(192,57,43,0.18); border-color: rgba(255,107,107,0.6); }
+#s2 .clabel { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.25rem; }
+#s2 .cbox.c1 .clabel { color: var(--green); }
+#s2 .cbox.c2 .clabel { color: var(--blue); }
+#s2 .cbox.c3 .clabel { color: var(--gold); }
+#s2 .cbox.c4 .clabel { color: var(--red2); }
+#s2 .cval { font-size: 0.82rem; color: #ffffff; line-height: 1.4; font-weight: 500; }
+#s2 .carr { color: var(--grey); font-size: 0.9rem; padding: 0.2rem 0; text-align: center; line-height: 1; }
+#s2 .keybox { margin-top: 1.2rem; max-width: 320px; margin-left: auto; margin-right: auto; background: var(--red); border-radius: 10px; padding: 1rem 1.2rem; }
+#s2 .keybox .kt { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: #ffffff; line-height: 1.45; }
+
+/* ════ SLIDE 3 ════ */
+#s3 { background: #0d0d0d; }
+#s3 .eyebrow { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; color: var(--red2); margin-bottom: 0.85rem; }
+#s3 .headline { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 6.5vw, 2.6rem); font-weight: 900; color: var(--white); line-height: 1.15; margin-bottom: 1.4rem; }
+#s3 .tri { display: flex; flex-direction: column; align-items: center; margin-bottom: 1.25rem; }
+#s3 .top-pill { background: var(--red); color: #ffffff; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 2.2rem; border-radius: 999px; letter-spacing: 0.06em; }
+#s3 .vline { width: 2px; height: 1.2rem; background: rgba(255,255,255,0.2); }
+#s3 .brow { display: flex; gap: 0.6rem; align-items: center; }
+#s3 .bot-pill { border: 1.5px solid rgba(255,255,255,0.3); color: #ffffff; font-weight: 600; font-size: 0.82rem; padding: 0.55rem 1.4rem; border-radius: 999px; background: var(--dark3); }
+#s3 .hline { width: 1.2rem; height: 2px; background: rgba(255,255,255,0.2); }
+#s3 .pillars { width: 100%; max-width: 340px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.55rem; }
+#s3 .pillar { background: var(--dark2); border-radius: 10px; padding: 0.85rem 1rem; text-align: left; display: flex; gap: 0.8rem; align-items: flex-start; }
+#s3 .pillar.p1 { border-left: 4px solid var(--red2); }
+#s3 .pillar.p2 { border-left: 4px solid var(--gold); }
+#s3 .pillar.p3 { border-left: 4px solid var(--blue); }
+#s3 .pico { font-size: 1.1rem; flex-shrink: 0; }
+#s3 .ptitle { font-size: 0.82rem; font-weight: 700; color: #ffffff; margin-bottom: 0.2rem; }
+#s3 .pdesc { font-size: 0.75rem; color: var(--grey); line-height: 1.45; }
+
+/* ════ SLIDE 4 ════ */
+#s4 { background: #0d0d0d; }
+#s4 .eyebrow { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; color: var(--gold); margin-bottom: 0.85rem; }
+#s4 .headline { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 6.5vw, 2.6rem); font-weight: 900; color: var(--white); line-height: 1.15; margin-bottom: 1.25rem; }
+#s4 .levers { width: 100%; max-width: 340px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.6rem; }
+#s4 .lever { border-radius: 10px; padding: 0.9rem 1rem; text-align: left; border: 1.5px solid; }
+#s4 .lever.l1 { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.45); }
+#s4 .lever.l2 { background: rgba(77,184,255,0.08); border-color: rgba(77,184,255,0.45); }
+#s4 .lever.l3 { background: rgba(240,180,41,0.08); border-color: rgba(240,180,41,0.45); }
+#s4 .lhead { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; }
+#s4 .lico { font-size: 1rem; }
+#s4 .ltitle { font-size: 0.88rem; font-weight: 700; color: #ffffff; }
+#s4 .ltag { font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.18rem 0.45rem; border-radius: 4px; margin-left: auto; font-weight: 700; }
+#s4 .lever.l1 .ltag { color: var(--red2); background: rgba(255,107,107,0.15); }
+#s4 .lever.l2 .ltag { color: var(--blue); background: rgba(77,184,255,0.15); }
+#s4 .lever.l3 .ltag { color: var(--gold); background: rgba(240,180,41,0.15); }
+#s4 .litems { list-style: none; display: flex; flex-direction: column; gap: 0.28rem; }
+#s4 .litems li { font-size: 0.77rem; color: #cccccc; padding-left: 0.8rem; position: relative; line-height: 1.4; }
+#s4 .lever.l1 .litems li::before { content: '›'; position: absolute; left: 0; color: var(--red2); }
+#s4 .lever.l2 .litems li::before { content: '›'; position: absolute; left: 0; color: var(--blue); }
+#s4 .lever.l3 .litems li::before { content: '›'; position: absolute; left: 0; color: var(--gold); }
+#s4 .note { margin-top: 1rem; font-size: 0.78rem; color: var(--grey); font-style: italic; max-width: 280px; margin-left: auto; margin-right: auto; }
+
+/* ════ SLIDE 5 ════ */
+#s5 { background: #0d0d0d; }
+#s5 .eyebrow { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; color: var(--blue); margin-bottom: 0.85rem; }
+#s5 .headline { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 6.5vw, 2.6rem); font-weight: 900; color: var(--white); line-height: 1.15; margin-bottom: 1.25rem; }
+
+#s5 .traits { width: 100%; max-width: 340px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.6rem; }
+#s5 .trait { background: var(--dark2); border-radius: 10px; padding: 0.9rem 1rem; text-align: left; display: flex; gap: 0.85rem; align-items: flex-start; }
+#s5 .trait.t1 { border-left: 4px solid var(--red2); }
+#s5 .trait.t2 { border-left: 4px solid var(--green); }
+#s5 .trait.t3 { border-left: 4px solid var(--blue); }
+#s5 .tico { font-size: 1.3rem; flex-shrink: 0; }
+#s5 .ttitle { font-size: 0.85rem; font-weight: 700; color: #ffffff; margin-bottom: 0.2rem; }
+#s5 .tdesc { font-size: 0.76rem; color: #cccccc; line-height: 1.5; }
+
+#s5 .idea-box {
+  margin-top: 1rem; max-width: 340px; margin-left: auto; margin-right: auto;
+  background: rgba(240,180,41,0.1); border: 1.5px solid rgba(240,180,41,0.55);
+  border-radius: 10px; padding: 0.9rem 1.1rem;
+  display: flex; gap: 0.8rem; align-items: center; text-align: left;
+}
+#s5 .idea-ico { font-size: 1.5rem; flex-shrink: 0; }
+#s5 .idea-title { font-size: 0.82rem; font-weight: 700; color: var(--gold); margin-bottom: 0.2rem; }
+#s5 .idea-desc { font-size: 0.75rem; color: #cccccc; line-height: 1.45; }
+
+/* ════ SLIDE 6 ════ */
+#s6 { background: var(--red); }
+#s6 .eyebrow { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 1.25rem; }
+#s6 .big { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 6vw, 2.6rem); font-weight: 900; color: #ffffff; line-height: 1.2; margin-bottom: 1.5rem; }
+
+#s6 .objective {
+  display: flex; justify-content: center; gap: 0.5rem;
+  align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+#s6 .obj-step {
+  background: rgba(0,0,0,0.25); border-radius: 8px;
+  padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 700;
+  color: #ffffff; letter-spacing: 0.04em;
+}
+#s6 .obj-arrow { color: rgba(255,255,255,0.5); font-size: 1rem; }
+
+#s6 .commit { background: rgba(0,0,0,0.22); border-radius: 12px; padding: 1.2rem 1.4rem; max-width: 310px; margin: 0 auto 1.5rem; }
+#s6 .clabel { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.6rem; font-weight: 700; }
+#s6 .ctext { font-size: 0.88rem; color: #ffffff; line-height: 1.65; }
+
+#s6 .sign { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: #ffffff; }
+#s6 .sign-sub { font-size: 0.72rem; color: rgba(255,255,255,0.65); margin-top: 0.3rem; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="dots" id="dots"></div>
+
+<div class="deck">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active" id="s1">
+    <div class="badge-top">
+      <div class="badge">Boulangeries Pâtisseries Vincent · 1er Juillet 2026</div>
+    </div>
+    <div class="name">Pierre<span class="dot-red">.</span></div>
+    <div class="subtitle">Pierre-Olivier D'Oria, Responsable des ventes</div>
+    <div class="divider"></div>
+    <div class="facts">
+      <div class="fact f1">
+        <div class="flabel">Formation</div>
+        <div class="fvalue">École hôtelière, patente du canton de Vaud, diplôme de comptable confirmé</div>
+      </div>
+      <div class="fact f2">
+        <div class="flabel">Parcours</div>
+        <div class="fvalue">Restauration classique, direction bar, restaurant et département. Beau-Rivage Palace, Starbucks, Nespresso, Boillat Responsable des ventes, 8 boutiques, 75 personnes</div>
+      </div>
+      <div class="fact f3">
+        <div class="flabel">En Suisse</div>
+        <div class="fvalue">D'origine bretonne, en Suisse depuis 26 ans, naturalisé suisse</div>
+      </div>
+      <div class="fact f4">
+        <div class="flabel">Personnel</div>
+        <div class="fvalue">Marié, un fils Alessio 8 ans</div>
+      </div>
+    </div>
+    <div class="callout">Appelez-moi simplement <strong>Pierre</strong>.</div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide" id="s2">
+    <div class="eyebrow">Le cycle de vie de l'entreprise</div>
+    <div class="headline">Les flux<br>de liquidités</div>
+    <div class="intro">
+      <strong>C'est le client qui fait vivre l'entreprise.</strong><br>
+      C'est le client qui paye les salaires.
+    </div>
+    <div class="cycle">
+      <div class="cbox c1">
+        <div class="clabel">Le client achète</div>
+        <div class="cval">Chaque vente génère du cash, c'est le début du cycle</div>
+      </div>
+      <div class="carr">↓</div>
+      <div class="cbox c2">
+        <div class="clabel">Charges fixes</div>
+        <div class="cval">Loyer, salaires, fournisseurs, énergie</div>
+      </div>
+      <div class="carr">↓</div>
+      <div class="cbox c3">
+        <div class="clabel">Charges variables</div>
+        <div class="cval">Matières premières, emballages, pertes produits</div>
+      </div>
+      <div class="carr">↓</div>
+      <div class="cbox c4">
+        <div class="clabel">Ce qu'il reste</div>
+        <div class="cval">Bénéfice réinvesti pour se développer et traverser les crises</div>
+      </div>
+    </div>
+    <div class="keybox">
+      <div class="kt">Sans client, pas de cash, pas de salaires.<br>Le client est au cœur de tout.</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide" id="s3">
+    <div class="eyebrow">Ce qui fait la différence</div>
+    <div class="headline">Tout tourne<br>autour de 3 piliers</div>
+    <div class="tri">
+      <div class="top-pill">CLIENT</div>
+      <div class="vline"></div>
+      <div class="brow">
+        <div class="bot-pill">PRODUIT</div>
+        <div class="hline"></div>
+        <div class="bot-pill">ÉQUIPE</div>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar p1">
+        <div class="pico">🧑‍🤝‍🧑</div>
+        <div>
+          <div class="ptitle">Client</div>
+          <div class="pdesc">Accueil, ambiance, service, rapport qualité prix. Le client qui revient et qui en parle.</div>
+        </div>
+      </div>
+      <div class="pillar p2">
+        <div class="pico">🥐</div>
+        <div>
+          <div class="ptitle">Produit</div>
+          <div class="pdesc">Le bon produit, au bon endroit, au bon moment. Production pilotée par les ventes, pas par l'habitude.</div>
+        </div>
+      </div>
+      <div class="pillar p3">
+        <div class="pico">👥</div>
+        <div>
+          <div class="ptitle">Équipe</div>
+          <div class="pdesc">La bonne personne, au bon poste, au bon moment. Suivi des procédures, gestion des plannings et des heures travaillées.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide" id="s4">
+    <div class="eyebrow">Ce qu'on va faire ensemble</div>
+    <div class="headline">Les 3 leviers<br>opérationnels</div>
+    <div class="levers">
+      <div class="lever l1">
+        <div class="lhead">
+          <div class="lico">🏭</div>
+          <div class="ltitle">Production</div>
+          <div class="ltag">Data décision</div>
+        </div>
+        <ul class="litems">
+          <li>Planification basée sur les ventes réelles</li>
+          <li>Suivi gestion marchandise 2 fois par jour, inventaire mi-journée et perte effective le soir</li>
+          <li>Bon produit, bon endroit, bon moment</li>
+        </ul>
+      </div>
+      <div class="lever l2">
+        <div class="lhead">
+          <div class="lico">🏪</div>
+          <div class="ltitle">Vente</div>
+          <div class="ltag">Expérience client</div>
+        </div>
+        <ul class="litems">
+          <li>Accueil structuré et chaleureux</li>
+          <li>Vitrine et ambiance boutique</li>
+          <li>Snacking, sandwiches faits maison</li>
+        </ul>
+      </div>
+      <div class="lever l3">
+        <div class="lhead">
+          <div class="lico">👥</div>
+          <div class="ltitle">Staff</div>
+          <div class="ltag">Organisation</div>
+        </div>
+        <ul class="litems">
+          <li>Plannings alignés sur les flux clients</li>
+          <li>Clarté des rôles et des attentes</li>
+          <li>Cahier des charges par type de poste</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 -->
+  <div class="slide" id="s5">
+    <div class="eyebrow">Comment je travaille</div>
+    <div class="headline">Mon style<br>de management</div>
+    <div class="traits">
+      <div class="trait t1">
+        <div class="tico">🎯</div>
+        <div>
+          <div class="ttitle">Exigeant</div>
+          <div class="tdesc">Je fixe des standards élevés. Ce qui est bien, je le dis. Ce qui ne l'est pas, je le dis aussi, clairement et dans le respect. Je suis partisan du souci du détail.</div>
+        </div>
+      </div>
+      <div class="trait t2">
+        <div class="tico">🤝</div>
+        <div>
+          <div class="ttitle">Ouvert</div>
+          <div class="tdesc">Je construis avec vous. Votre expérience terrain compte. Ce sera un échange d'expériences.</div>
+        </div>
+      </div>
+      <div class="trait t3">
+        <div class="tico">📞</div>
+        <div>
+          <div class="ttitle">Disponible</div>
+          <div class="tdesc">Je suis présent. Une question, un problème, une idée : vous pouvez me parler.</div>
+        </div>
+      </div>
+    </div>
+    <div class="idea-box">
+      <div class="idea-ico">💡</div>
+      <div>
+        <div class="idea-title">Boîte à idées dans chaque boutique</div>
+        <div class="idea-desc">Les idées de chaque collaborateur seront les bienvenues. Les meilleures seront étudiées pour être mises en place.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 -->
+  <div class="slide" id="s6">
+    <div class="eyebrow">Ce soir, c'est le début</div>
+    <div class="big">Construire ensemble.<br>On a besoin<br>de toutes les forces.</div>
+
+    <div class="objective">
+      <div class="obj-step">Structurer</div>
+      <div class="obj-arrow">›</div>
+      <div class="obj-step">Optimiser</div>
+      <div class="obj-arrow">›</div>
+      <div class="obj-step">Développer</div>
+    </div>
+
+    <div class="commit" style="background:rgba(0,0,0,0.3);">
+      <div class="clabel">La culture du changement</div>
+      <div class="ctext">Le plus difficile dans la gestion d'une entreprise et du personnel, c'est de sortir de sa zone de confort. Je l'ai vécu tout au long de ma carrière. Certains s'adapteront, d'autres moins. Nous devons aller dans le même sens, celui de l'entreprise, dans le respect et l'écoute de chacun. Ceux qui ne pourront pas aller dans ce sens ne pourront pas rester avec nous.</div>
+    </div>
+
+    <div class="sign">Pierre</div>
+    <div class="sign-sub">Responsable des ventes, Boulangeries Pâtisseries Vincent</div>
+  </div>
+
+</div>
+
+<div class="nav">
+  <button id="prev">←</button>
+  <span class="counter" id="counter">1/6</span>
+  <button id="next">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const total = slides.length;
+  let cur = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = (n + total) % total;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    counter.textContent = `${cur + 1}/${total}`;
+  }
+
+  document.getElementById('prev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('next').addEventListener('click', () => goTo(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(cur + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(cur - 1);
+  });
+
+  let startX = 0;
+  document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) dx < 0 ? goTo(cur + 1) : goTo(cur - 1);
+  });
+</script>
+</body>
+</html>
